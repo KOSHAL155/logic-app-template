@@ -1,0 +1,114 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_OrderLogicAppDev_name": {
+            "defaultValue": "OrderLogicAppDev",
+            "type": "String"
+        },
+        "sites_orderfunctionappdev_externalid": {
+            "defaultValue": "/subscriptions/b4dac0ad-7f66-4466-ac9f-0c35a7375fab/resourceGroups/rg-nbmarketplace-dev/providers/Microsoft.Web/sites/orderfunctionappdev",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_OrderLogicAppDev_name')]",
+            "location": "southcentralus",
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "triggers": {
+                        "manual": {
+                            "type": "Request",
+                            "kind": "Http",
+                            "inputs": {}
+                        }
+                    },
+                    "actions": {
+                        "Condition": {
+                            "actions": {
+                                "HTTP": {
+                                    "runAfter": {},
+                                    "type": "Http",
+                                    "inputs": {
+                                        "body": "@body('OrderDataTransformFunction')",
+                                        "headers": {
+                                            "token": "0ecb23bd7f5b475596f4a9282ccd177e"
+                                        },
+                                        "method": "POST",
+                                        "uri": "http://devdata.newbenefits.com/api/ManageMember/AddDirectSubscriberOrderConfirmation"
+                                    }
+                                },
+                                "Response": {
+                                    "runAfter": {
+                                        "HTTP": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Response",
+                                    "kind": "Http",
+                                    "inputs": {
+                                        "body": {
+                                            "result": "true"
+                                        },
+                                        "statusCode": 200
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "OrderDataTransformFunction": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "else": {
+                                "actions": {
+                                    "Response_2": {
+                                        "runAfter": {},
+                                        "type": "Response",
+                                        "kind": "Http",
+                                        "inputs": {
+                                            "body": {
+                                                "result": "false"
+                                            },
+                                            "statusCode": "@outputs('OrderDataTransformFunction')['statusCode']"
+                                        }
+                                    }
+                                }
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@outputs('OrderDataTransformFunction')['statusCode']",
+                                            200
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        },
+                        "OrderDataTransformFunction": {
+                            "runAfter": {},
+                            "type": "Function",
+                            "inputs": {
+                                "body": "@triggerBody()",
+                                "function": {
+                                    "id": "[concat(parameters('sites_orderfunctionappdev_externalid'), '/functions/OrderDataTransformFunction')]"
+                                }
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {}
+            }
+        }
+    ]
+}
