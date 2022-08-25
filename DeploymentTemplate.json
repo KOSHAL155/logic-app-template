@@ -1,0 +1,1335 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanName_StoreFront": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of application service plan to create"
+      }
+    },
+    "appInsights_StoreFront": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the appinsights to create"
+      }
+    },
+    "webAppName_StoreFront": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the web app to create"
+      }
+    },
+    "virtoCommerceDistributorHomePage": {
+      "type": "string",
+      "defaultValue": "/distributor/new-orders",
+      "metadata": {
+        "description": "The distributor home page path"
+      }
+    },
+    "virtoCommerceEndpointPassword": {
+      "type": "string",
+      "metadata": {
+        "description": "The password for frontend"
+      }
+    },
+    "virtoCommerceEndpointURL": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the endpoint url"
+      }
+    },
+    "virtoCommerceEnvironment": {
+      "type": "string",
+      "metadata": {
+        "description": "The type of the environment"
+      }
+    },
+    "virtoCommerceImpersonateApiKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the endpoint url"
+      }
+    },
+    "webAppSlotName_StoreFront": {
+      "type": "string",
+      "defaultValue": "staging",
+      "metadata": {
+        "description": "The name of the web app slot to create"
+      }
+    },
+    "sqlServerName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the SQL server to create"
+      }
+    },
+    "sqlAdministratorLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "The admin user of the SQL Server"
+      }
+    },
+    "sqlAdministratorLoginPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password of the admin user of the SQL Server"
+      }
+    },
+    "sqlElasticPoolName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the SQL elastic pool to create"
+      }
+    },
+    "sqlDatabaseNameMain": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "sqlDatabaseNameCart": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "sqlDatabaseNameCatalog": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "sqlDatabaseNameCustomers": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "sqlDatabaseNameOrders": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "sqlDatabaseNamePricing": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database to create"
+      }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the storage account to create"
+      }
+    },
+    "searchServiceName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the search service to create"
+      }
+    },
+    "searchServiceScope": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the search service scope to create"
+      }
+    },
+    "cacheName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the redis cache to create"
+      }
+    },
+    "cacheRedisChannelName_Backend": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the redis cache channel to create"
+      }
+    },
+    "cdnProfileName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of CDN Profile to create"
+      }
+    },
+    "cdnEndpointName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of CDN Endpoint to create"
+      }
+    },
+    "appServicePlanName_Backend": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of application service plan to create"
+      }
+    },
+    "appInsights_Backend": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the appinsights to create"
+      }
+    },
+    "webAppName_Backend": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the web app to create"
+      }
+    },
+    "storefrontEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "The url to the storefront"
+      }
+    },
+    "azureADApplicationId": {
+      "type": "string",
+      "metadata": {
+        "description": "The application ID of the Azure AD app"
+      }
+    },
+    "azureADEnabled": {
+      "type": "string",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "The status of Azure AD authentification"
+      }
+    },
+    "azureADTenantId": {
+      "type": "string",
+      "metadata": {
+        "description": "The tenant ID of the Azure AD app"
+      }
+    },
+    "notificationEmailSender": {
+      "type": "string",
+      "metadata": {
+        "description": "Sender address for notifications"
+      }
+    },
+    "notificationSendgridApiKey": {
+      "type": "string",
+      "metadata": {
+        "description": "SendGrid ApiKey"
+      }
+    },
+    "countryCode": {
+      "type": "string",
+      "metadata": {
+        "description": "Backend - Country Code"
+      }
+    },
+    "timeZoneId": {
+      "type": "string",
+      "defaultValue": "W. Europe Standard Time",
+      "metadata": {
+        "description": "Backend - TimeZoneId"
+      }
+    },
+    "notificationSmsGateway": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway for notifications"
+      }
+    },
+    "notificationSmsDefaultSender": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms default number for notifications"
+      }
+    },
+    "notificationSmsGatewayATapiKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway AfricasTalking ApiKey"
+      }
+    },
+    "notificationSmsGatewayATsender": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway AfricasTalking sender"
+      }
+    },
+    "notificationSmsGatewayATuserName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway AfricasTalking user name"
+      }
+    },
+    "notificationSmsGatewayEZpassword": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Ezagel password"
+      }
+    },
+    "notificationSmsGatewayEZsenderId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Ezagel sender Id"
+      }
+    },
+    "notificationSmsGatewayEZservice": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Ezagel service"
+      }
+    },
+    "notificationSmsGatewayEZuserName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Ezagel user name"
+      }
+    },
+    "notificationSmsGatewayHCapiKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Harcom ApiKey"
+      }
+    },
+    "notificationSmsGatewayHCendpointUrl": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Harcom endpoint url"
+      }
+    },
+    "notificationSmsGatewayHCsender": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Harcom sender"
+      }
+    },
+    "notificationSmsGatewayHCuserName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Harcom user name"
+      }
+    },
+    "notificationSmsGatewayTWAccountId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Twilio user name"
+      }
+    },
+    "notificationSmsGatewayTWPassword": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Twilio user name"
+      }
+    },
+    "notificationSmsGatewayVNendpointUrl": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Vas2Net endpoint url"
+      }
+    },
+    "notificationSmsGatewayVNpassword": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Vas2Net password"
+      }
+    },
+    "notificationSmsGatewayVNsenderId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Vas2Net sender Id"
+      }
+    },
+    "notificationSmsGatewayVNuserName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sms gateway Vas2Net user name"
+      }
+    },
+    "webAppSlotName_Backend": {
+      "type": "string",
+      "defaultValue": "staging",
+      "metadata": {
+        "description": "The name of the web app slot to create"
+      }
+    },
+  },
+  "variables": {
+    "sqlDatabaseCollation": "SQL_Latin1_General_CP1_CI_AS",
+    "sqlServerResourceId": "[concat(resourcegroup().Id, '/providers/Microsoft.Sql/servers/', parameters('sqlServerName'))]",
+    "sqlFQDN": "[concat(parameters('sqlServerName'), '.database.windows.net')]",
+    "storageAccountType": "Standard_LRS",
+    "storageProvider": "AzureBlobStorage"
+  },
+  "resources": [
+    {
+      "name": "[parameters('appInsights_StoreFront')]",
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2015-05-01",
+      "kind": "web",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "ApplicationId": "[parameters('appInsights_StoreFront')]",
+        "Application_Type": "web",
+        "Flow_Type": "Bluefield",
+        "Request_Source": "rest"
+      },
+      "tags": {
+        "displayName": "applicationInsights"
+      }
+    },
+    {
+      "name": "[parameters('webAppName_StoreFront')]",
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
+      "kind": "app",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "webApp_storefront"
+      },
+      "dependsOn": [ "[resourceId('Microsoft.Insights/components/', parameters('appinsights_StoreFront'))]" ],
+      "properties": {
+        "enabled": true,
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName_StoreFront'))]",
+        "siteConfig": {
+          "requestTracingEnabled": true,
+          "requestTracingExpirationTime": "9999-12-31T23:59:00Z",
+          "httpLoggingEnabled": true,
+          "logsDirectorySizeLimit": 100,
+          "detailedErrorLoggingEnabled": true,
+          "clientAffinityEnabled": true,
+          "use32BitWorkerProcess": false,
+          "webSocketsEnabled": true,
+          "alwaysOn": true,
+          "httpsOnly": true,
+          "http20Enabled": true,
+          "minTlsVersion": "1.2",
+          "ftpsState": "Disabled",
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "dotnetcore"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(concat('Microsoft.Insights/components/', parameters('appInsights_StoreFront')), '2015-05-01').InstrumentationKey]"
+            },
+            {
+              "name": "ASPNETCORE_ENVIRONMENT",
+              "value": "Production"
+            },
+            {
+              "name": "AzureAD:ClientId",
+              "value": "[parameters('azureADApplicationId')]"
+            },
+            {
+              "name": "AzureAD:Enabled",
+              "value": "[parameters('azureADEnabled')]"
+            },
+            {
+              "name": "AzureAD:TenantId",
+              "value": "[parameters('azureADTenantId')]"
+            },
+            {
+              "name": "IdentityOptions:Password:RequiequireUppercase",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireDigit",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequiredLength",
+              "value": "8"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireLowercase",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireNonAlphanumeric",
+              "value": "true"
+            },
+            {
+              "name": "VirtoCommerce:CacheSlidingExpiration",
+              "value": "0:15:0"
+            },
+            {
+              "name": "Virtocommerce:DistributorHomePage",
+              "value": "[parameters('virtoCommerceDistributorHomePage')]"
+            },
+            {
+              "name": "VirtoCommerce:Endpoint:Password",
+              "value": "[parameters('virtoCommerceEndpointPassword')]"
+            },
+            {
+              "name": "VirtoCommerce:Endpoint:Url",
+              "value": "[parameters('virtoCommerceEndpointURL')]"
+            },
+            {
+              "name": "VirtoCommerce:Endpoint:UserName",
+              "value": "frontend"
+            },
+            {
+              "name": "VirtoCommerce:Environment",
+              "value": "[parameters('virtoCommerceEnvironment')]"
+            },
+            {
+              "name": "VirtoCommerce:ImpersonateApiKey",
+              "value": "[parameters('virtoCommerceImpersonateApiKey')]"
+            }
+          ],
+          "connectionStrings": [
+          ]
+        }
+      },
+      "resources": [
+        {
+          "name": "[concat(parameters('webAppName_StoreFront'), '/', parameters('webAppSlotName_StoreFront'))]",
+          "type": "Microsoft.Web/sites/slots",
+          "apiVersion": "2018-11-01",
+          "kind": "app",
+          "location": "[resourceGroup().location]",
+          "tags": {
+            "displayName": "webAppSlot"
+          },
+          "dependsOn": [ "[resourceId('Microsoft.Web/sites', parameters('webAppName_StoreFront'))]" ],
+          "properties": {
+            "enabled": true,
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName_StoreFront'))]",
+            "siteConfig": {
+              "requestTracingEnabled": true,
+              "requestTracingExpirationTime": "9999-12-31T23:59:00Z",
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": true,
+              "use32BitWorkerProcess": false,
+              "webSocketsEnabled": true,
+              "alwaysOn": true,
+              "http20Enabled": true,
+              "minTlsVersion": "1.2",
+              "ftpsState": "Disabled",
+              "clientAffinityEnabled": true,
+              "httpsOnly": true,
+              "metadata": [
+                {
+                  "name": "CURRENT_STACK",
+                  "value": "dotnetcore"
+                }
+              ],
+              "appSettings": [
+                {
+                  "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                  "value": "[reference(concat('Microsoft.Insights/components/', parameters('appInsights_StoreFront')), '2015-05-01').InstrumentationKey]"
+                },
+                {
+                  "name": "ASPNETCORE_ENVIRONMENT",
+                  "value": "Production"
+                },
+                {
+                  "name": "AzureAD:ClientId",
+                  "value": "[parameters('azureADApplicationId')]"
+                },
+                {
+                  "name": "AzureAD:Enabled",
+                  "value": "[parameters('azureADEnabled')]"
+                },
+                {
+                  "name": "AzureAD:TenantId",
+                  "value": "[parameters('azureADTenantId')]"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequiequireUppercase",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireDigit",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequiredLength",
+                  "value": "8"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireLowercase",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireNonAlphanumeric",
+                  "value": "true"
+                },
+                {
+                  "name": "VirtoCommerce:CacheSlidingExpiration",
+                  "value": "0:15:0"
+                },
+                {
+                  "name": "Virtocommerce:DistributorHomePage",
+                  "value": "[parameters('virtoCommerceDistributorHomePage')]"
+                },
+                {
+                  "name": "VirtoCommerce:Endpoint:Password",
+                  "value": "[parameters('virtoCommerceEndpointPassword')]"
+                },
+                {
+                  "name": "VirtoCommerce:Endpoint:Url",
+                  "value": "[parameters('virtoCommerceEndpointURL')]"
+                },
+                {
+                  "name": "VirtoCommerce:Endpoint:UserName",
+                  "value": "frontend"
+                },
+                {
+                  "name": "VirtoCommerce:Environment",
+                  "value": "[parameters('virtoCommerceEnvironment')]"
+                },
+                {
+                  "name": "VirtoCommerce:ImpersonateApiKey",
+                  "value": "[parameters('virtoCommerceImpersonateApiKey')]"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNameMain'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databaseMain"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNameCart'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databaseCart"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNameCatalog'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databaseCatalog"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNameCustomers'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databaseCustomer"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNameOrders'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databaseOrders"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('sqlserverName'), '/', parameters('sqlDatabaseNamePricing'))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "apiVersion": "2017-10-01-preview",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "databasePricing"
+      },
+      "properties": {
+        "collation": "[variables('sqlDatabaseCollation')]",
+        "elasticPoolId": "[concat(variables('sqlServerResourceId'), '/elasticPools/', parameters('sqlElasticPoolName'))]"
+      }
+    },
+    {
+      "name": "[concat(parameters('cdnProfileName'), '/', parameters('cdnEndpointName'))]",
+      "type": "Microsoft.Cdn/profiles/endpoints",
+      "apiVersion": "2017-10-12",
+      "location": "[if(equals(resourceGroup().location, 'southafricanorth'),'global',resourceGroup().location)]",
+      "dependsOn": ["[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"],
+      "tags": {
+        "displayName": "cdnEndpoint"
+      },
+      "properties": {
+        "originHostHeader": "[concat (parameters('storageAccountName'),'.blob.core.windows.net')]",
+        "isHttpAllowed": false,
+        "isHttpsAllowed": true,
+        "optimizationType": "GeneralWebDelivery",
+        "origins": [
+          {
+            "name": "[parameters('storageAccountName')]",
+            "properties": {
+              "hostName": "[concat (parameters('storageAccountName'),'.blob.core.windows.net')]",
+              "httpsPort": 443
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('storageAccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2018-11-01",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[variables('storageAccountType')]"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "accessTier": "Hot",
+        "supportsHttpsTrafficOnly": true,
+        "encryption": {
+          "services": {
+            "blob": {
+              "enabled": true
+            },
+            "file": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      },
+      "tags": {
+        "displayName": "storageAccount"
+      }
+    },
+    {
+      "name": "[parameters('appInsights_Backend')]",
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2015-05-01",
+      "kind": "web",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "ApplicationId": "[parameters('appInsights_Backend')]",
+        "Application_Type": "web",
+        "Flow_Type": "Bluefield",
+        "Request_Source": "rest"
+      },
+      "tags": {
+        "displayName": "applicationInsights"
+      }
+    },
+    {
+      "name": "[parameters('webAppName_Backend')]",
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
+      "kind": "app",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "webApp_backend"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+        "[resourceId('Microsoft.Insights/components/', parameters('appinsights_Backend'))]"
+      ],
+      "properties": {
+        "enabled": true,
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName_Backend'))]",
+        "siteConfig": {
+          "requestTracingEnabled": true,
+          "requestTracingExpirationTime": "9999-12-31T23:59:00Z",
+          "httpLoggingEnabled": true,
+          "logsDirectorySizeLimit": 100,
+          "detailedErrorLoggingEnabled": true,
+          "clientAffinityEnabled": true,
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "httpsOnly": true,
+          "http20Enabled": true,
+          "minTlsVersion": "1.2",
+          "ftpsState": "Disabled",
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "dotnetcore"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(concat('Microsoft.Insights/components/', parameters('appInsights_Backend')), '2015-05-01').InstrumentationKey]"
+            },
+            {
+              "name": "ASPNETCORE_ENVIRONMENT",
+              "value": "Production"
+            },
+            {
+              "name": "Assets:AzureBlobStorage:CdnUrl",
+              "value": "[concat(parameters('cdnEndpointName'),'.azureedge.net')]"
+            },
+            {
+              "name": "Assets:AzureBlobStorage:ConnectionString",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',concat(listKeys(parameters('storageAccountName'),'2015-05-01-preview').key1))]"
+            },
+            {
+              "name": "Assets:Provider",
+              "value": "[variables('storageProvider')]"
+            },
+            {
+              "name": "AzureAD:ApplicationId",
+              "value": "[parameters('azureADApplicationId')]"
+            },
+            {
+              "name": "AzureAD:Enabled",
+              "value": "[parameters('azureADEnabled')]"
+            },
+            {
+              "name": "AzureAd:MetadataAddress",
+              "value": "https://login.microsoftonline.com/66e853de-ece3-44dd-9d66-ee6bdf4159d4/v2.0/.well-known/openid-configuration?appid=5ae45759-aaea-4931-a366-87c22f73e52c"
+            },
+            {
+              "name": "AzureAD:TenantId",
+              "value": "[parameters('azureADTenantId')]"
+            },
+            {
+              "name": "Caching:Redis:ChannelName",
+              "value": "[parameters('cacheRedisChannelName_Backend')]"
+            },
+            {
+              "name": "Content:AzureBlobStorage:ConnectionString",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',concat(listKeys(parameters('storageAccountName'),'2015-05-01-preview').key1))]"
+            },
+            {
+              "name": "Content:AzureBlobStorage:RootPath",
+              "value": "cms"
+            },
+            {
+              "name": "Content:Provider",
+              "value": "[variables('storageProvider')]"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireDigit",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequiredLength",
+              "value": "8"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireLowercase",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireNonAlphanumeric",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:Password:RequireUppercase",
+              "value": "true"
+            },
+            {
+              "name": "IdentityOptions:User:AllowedUserNameCharacters",
+              "value": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+"
+            },
+            {
+              "name": "IdentityOptions:User:RequireUniqueEmail",
+              "value": "false"
+            },
+            {
+              "name": "Notifications:DefaultSender",
+              "value": "[parameters('notificationEmailSender')]"
+            },
+            {
+              "name": "Notifications:Gateway",
+              "value": "SendGrid"
+            },
+            {
+              "name": "Notifications:SendGrid:ApiKey",
+              "value": "[parameters('notificationSendgridApiKey')]"
+            },
+            {
+              "name": "Notifications:SmsGateway",
+              "value": "[parameters('notificationSmsGateway')]"
+            },
+            {
+              "name": "Notifications:SmsDefaultSender",
+              "value": "[parameters('notificationSmsDefaultSender')]"
+            },
+            {
+              "name": "Notifications:AfricasTalking:ApiKey",
+              "value": "[parameters('notificationSmsGatewayATapiKey')]"
+            },
+            {
+              "name": "Notifications:AfricasTalking:Sender",
+              "value": "[parameters('notificationSmsGatewayATsender')]"
+            },
+            {
+              "name": "Notifications:AfricasTalking:UserName",
+              "value": "[parameters('notificationSmsGatewayATuserName')]"
+            },
+            {
+              "name": "Notifications:Ezagel:Password",
+              "value": "[parameters('notificationSmsGatewayEZpassword')]"
+            },
+            {
+              "name": "Notifications:Ezagel:SenderId",
+              "value": "[parameters('notificationSmsGatewayEZsenderId')]"
+            },
+            {
+              "name": "Notifications:Ezagel:Service",
+              "value": "[parameters('notificationSmsGatewayEZservice')]"
+            },
+            {
+              "name": "Notifications:Ezagel:UserName",
+              "value": "[parameters('notificationSmsGatewayEZuserName')]"
+            },
+            {
+              "name": "Notifications:Harcom:ApiKey",
+              "value": "[parameters('notificationSmsGatewayHCapiKey')]"
+            },
+            {
+              "name": "Notifications:Harcom:EndpointUrl",
+              "value": "[parameters('notificationSmsGatewayHCendpointUrl')]"
+            },
+            {
+              "name": "Notifications:Harcom:Sender",
+              "value": "[parameters('notificationSmsGatewayHCsender')]"
+            },
+            {
+              "name": "Notifications:Harcom:UserName",
+              "value": "[parameters('notificationSmsGatewayHCuserName')]"
+            },
+            {
+              "name": "Notifications:Twilio:AccountId",
+              "value": "[parameters('notificationSmsGatewayTWAccountId')]"
+            },
+            {
+              "name": "Notifications:Twilio:AccountPassword",
+              "value": "[parameters('notificationSmsGatewayTWPassword')]"
+            },
+            {
+              "name": "Notifications:Vas2Net:EndpointUrl",
+              "value": "[parameters('notificationSmsGatewayVNendpointUrl')]"
+            },
+            {
+              "name": "Notifications:Vas2Net:Password",
+              "value": "[parameters('notificationSmsGatewayVNpassword')]"
+            },
+            {
+              "name": "Notifications:Vas2Net:SenderId",
+              "value": "[parameters('notificationSmsGatewayVNsenderId')]"
+            },
+            {
+              "name": "Notifications:Vas2Net:UserName",
+              "value": "[parameters('notificationSmsGatewayVNuserName')]"
+            },
+            {
+              "name": "Search:AzureSearch:Key",
+              "value": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', parameters('searchServiceName')),'2015-08-19').primaryKey]"
+            },
+            {
+              "name": "Search:AzureSearch:SearchServiceName",
+              "value": "[parameters('searchServiceName')]"
+            },
+            {
+              "name": "Search:Provider",
+              "value": "AzureSearch"
+            },
+            {
+              "name": "Search:Scope",
+              "value": "[parameters('searchServiceScope')]"
+            },
+            {
+              "name": "VirtoCommerce:DiscoveryPath",
+              "value": "../modules"
+            },
+            {
+              "name": "VirtoCommerce:RefreshProbingFolderOnStart",
+              "value": "false"
+            }
+          ],
+          "connectionStrings": [
+            {
+              "name": "VirtoCommerce",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameMain'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "VirtoCommerce.Cart",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCart'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "VirtoCommerce.Catalog",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCatalog'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "VirtoCommerce.Customer",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCustomers'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "VirtoCommerce.Orders",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameOrders'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "VirtoCommerce.Pricing",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNamePricing'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "Heineken.Catalog",
+              "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCatalog'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+              "type": "SQLAzure"
+            },
+            {
+              "name": "RedisConnectionString",
+              "connectionString": "[concat(parameters('cacheName'),'.redis.cache.windows.net:6380,abortConnect=false,ssl=True,allowAdmin=True,password=', listKeys(resourceId('Microsoft.Cache/Redis', parameters('cacheName')),'2016-04-01').primaryKey)]",
+              "type": "Custom"
+            }
+          ],
+          "virtualApplications": [
+            {
+              "virtualPath": "/",
+              "physicalPath": "site\\wwwroot\\platform",
+              "preloadEnabled": false,
+              "virtualDirectories": [
+                {
+                  "virtualPath": "/modules",
+                  "physicalPath": "site\\wwwroot\\modules"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "resources": [
+        {
+          "name": "[concat(parameters('webAppName_Backend'), '/', parameters('webAppSlotName_Backend'))]",
+          "type": "Microsoft.Web/sites/slots",
+          "apiVersion": "2018-02-01",
+          "kind": "app",
+          "location": "[resourceGroup().location]",
+          "tags": {
+            "displayName": "webAppSlot"
+          },
+          "dependsOn": [ "[resourceId('Microsoft.Web/sites', parameters('webAppName_Backend'))]" ],
+          "properties": {
+            "enabled": true,
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName_Backend'))]",
+            "siteConfig": {
+              "requestTracingEnabled": true,
+              "requestTracingExpirationTime": "9999-12-31T23:59:00Z",
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": true,
+              "use32BitWorkerProcess": false,
+              "alwaysOn": true,
+              "http20Enabled": true,
+              "minTlsVersion": "1.2",
+              "ftpsState": "Disabled",
+              "clientAffinityEnabled": true,
+              "httpsOnly": true,
+              "metadata": [
+                {
+                  "name": "CURRENT_STACK",
+                  "value": "dotnetcore"
+                }
+              ],
+              "appSettings": [
+                {
+                  "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                  "value": "[reference(concat('Microsoft.Insights/components/', parameters('appInsights_Backend')), '2015-05-01').InstrumentationKey]"
+                },
+                {
+                  "name": "ASPNETCORE_ENVIRONMENT",
+                  "value": "Production"
+                },
+                {
+                  "name": "Assets:AzureBlobStorage:CdnUrl",
+                  "value": "[concat(parameters('cdnEndpointName'),'.azureedge.net')]"
+                },
+                {
+                  "name": "Assets:AzureBlobStorage:ConnectionString",
+                  "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',concat(listKeys(parameters('storageAccountName'),'2015-05-01-preview').key1))]"
+                },
+                {
+                  "name": "Assets:Provider",
+                  "value": "[variables('storageProvider')]"
+                },
+                {
+                  "name": "AzureAD:ApplicationId",
+                  "value": "[parameters('azureADApplicationId')]"
+                },
+                {
+                  "name": "AzureAD:Enabled",
+                  "value": "[parameters('azureADEnabled')]"
+                },
+                {
+                  "name": "AzureAd:MetadataAddress",
+                  "value": "https://login.microsoftonline.com/66e853de-ece3-44dd-9d66-ee6bdf4159d4/v2.0/.well-known/openid-configuration?appid=5ae45759-aaea-4931-a366-87c22f73e52c"
+                },
+                {
+                  "name": "AzureAD:TenantId",
+                  "value": "[parameters('azureADTenantId')]"
+                },
+                {
+                  "name": "Caching:Redis:ChannelName",
+                  "value": "[parameters('cacheRedisChannelName_Backend')]"
+                },
+                {
+                  "name": "Content:AzureBlobStorage:ConnectionString",
+                  "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',concat(listKeys(parameters('storageAccountName'),'2015-05-01-preview').key1))]"
+                },
+                {
+                  "name": "Content:AzureBlobStorage:RootPath",
+                  "value": "cms"
+                },
+                {
+                  "name": "Content:Provider",
+                  "value": "[variables('storageProvider')]"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireDigit",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequiredLength",
+                  "value": "8"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireLowercase",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireNonAlphanumeric",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:Password:RequireUppercase",
+                  "value": "true"
+                },
+                {
+                  "name": "IdentityOptions:User:AllowedUserNameCharacters",
+                  "value": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+"
+                },
+                {
+                  "name": "IdentityOptions:User:RequireUniqueEmail",
+                  "value": "false"
+                },
+                {
+                  "name": "Notifications:DefaultSender",
+                  "value": "[parameters('notificationEmailSender')]"
+                },
+                {
+                  "name": "Notifications:Gateway",
+                  "value": "SendGrid"
+                },
+                {
+                  "name": "Notifications:SendGrid:ApiKey",
+                  "value": "[parameters('notificationSendgridApiKey')]"
+                },
+                {
+                  "name": "Notifications:SmsGateway",
+                  "value": "[parameters('notificationSmsGateway')]"
+                },
+                {
+                  "name": "Notifications:SmsDefaultSender",
+                  "value": "[parameters('notificationSmsDefaultSender')]"
+                },
+                {
+                  "name": "Notifications:AfricasTalking:ApiKey",
+                  "value": "[parameters('notificationSmsGatewayATapiKey')]"
+                },
+                {
+                  "name": "Notifications:AfricasTalking:Sender",
+                  "value": "[parameters('notificationSmsGatewayATsender')]"
+                },
+                {
+                  "name": "Notifications:AfricasTalking:UserName",
+                  "value": "[parameters('notificationSmsGatewayATuserName')]"
+                },
+                {
+                  "name": "Notifications:Ezagel:Password",
+                  "value": "[parameters('notificationSmsGatewayEZpassword')]"
+                },
+                {
+                  "name": "Notifications:Ezagel:SenderId",
+                  "value": "[parameters('notificationSmsGatewayEZsenderId')]"
+                },
+                {
+                  "name": "Notifications:Ezagel:Service",
+                  "value": "[parameters('notificationSmsGatewayEZservice')]"
+                },
+                {
+                  "name": "Notifications:Ezagel:UserName",
+                  "value": "[parameters('notificationSmsGatewayEZuserName')]"
+                },
+                {
+                  "name": "Notifications:Harcom:ApiKey",
+                  "value": "[parameters('notificationSmsGatewayHCapiKey')]"
+                },
+                {
+                  "name": "Notifications:Harcom:EndpointUrl",
+                  "value": "[parameters('notificationSmsGatewayHCendpointUrl')]"
+                },
+                {
+                  "name": "Notifications:Harcom:Sender",
+                  "value": "[parameters('notificationSmsGatewayHCsender')]"
+                },
+                {
+                  "name": "Notifications:Harcom:UserName",
+                  "value": "[parameters('notificationSmsGatewayHCuserName')]"
+                },
+                {
+                  "name": "Notifications:Twilio:AccountId",
+                  "value": "[parameters('notificationSmsGatewayTWAccountId')]"
+                },
+                {
+                  "name": "Notifications:Twilio:AccountPassword",
+                  "value": "[parameters('notificationSmsGatewayTWPassword')]"
+                },
+                {
+                  "name": "Notifications:Vas2Net:EndpointUrl",
+                  "value": "[parameters('notificationSmsGatewayVNendpointUrl')]"
+                },
+                {
+                  "name": "Notifications:Vas2Net:Password",
+                  "value": "[parameters('notificationSmsGatewayVNpassword')]"
+                },
+                {
+                  "name": "Notifications:Vas2Net:SenderId",
+                  "value": "[parameters('notificationSmsGatewayVNsenderId')]"
+                },
+                {
+                  "name": "Notifications:Vas2Net:UserName",
+                  "value": "[parameters('notificationSmsGatewayVNuserName')]"
+                },
+                {
+                  "name": "Search:AzureSearch:Key",
+                  "value": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', parameters('searchServiceName')),'2015-08-19').primaryKey]"
+                },
+                {
+                  "name": "Search:AzureSearch:SearchServiceName",
+                  "value": "[parameters('searchServiceName')]"
+                },
+                {
+                  "name": "Search:Provider",
+                  "value": "AzureSearch"
+                },
+                {
+                  "name": "Search:Scope",
+                  "value": "[parameters('searchServiceScope')]"
+                },
+                {
+                  "name": "VirtoCommerce:DiscoveryPath",
+                  "value": "../modules"
+                },
+                {
+                  "name": "VirtoCommerce:RefreshProbingFolderOnStart",
+                  "value": "false"
+                }
+              ],
+              "connectionStrings": [
+                {
+                  "name": "VirtoCommerce",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameMain'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "VirtoCommerce.Cart",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCart'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "VirtoCommerce.Catalog",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCatalog'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "VirtoCommerce.Customer",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCustomers'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "VirtoCommerce.Orders",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameOrders'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "VirtoCommerce.Pricing",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNamePricing'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "Heineken.Catalog",
+                  "connectionString": "[concat('Server=tcp:', variables('sqlFQDN'), ',1433;Initial Catalog=', parameters('sqlDatabaseNameCatalog'), ';Persist Security Info=False;User Id=', parameters('sqlAdministratorLogin'), '@', parameters('sqlserverName'), ';Password=', parameters('sqlAdministratorLoginPassword'), ';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;')]",
+                  "type": "SQLAzure"
+                },
+                {
+                  "name": "RedisConnectionString",
+                  "connectionString": "[concat(parameters('cacheName'),'.redis.cache.windows.net,abortConnect=false,ssl=True,allowAdmin=True,password=', listKeys(resourceId('Microsoft.Cache/Redis', parameters('cacheName')),'2016-04-01').primaryKey)]",
+                  "type": "Custom"
+                }
+              ],
+              "virtualApplications": [
+                {
+                  "virtualPath": "/",
+                  "physicalPath": "site\\wwwroot\\platform",
+                  "preloadEnabled": false,
+                  "virtualDirectories": [
+                    {
+                      "virtualPath": "/modules",
+                      "physicalPath": "site\\wwwroot\\modules"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+	"outputs": {
+	}
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanName_StoreFront": {
+      "value": "asp-nb-public-prod"
+    },
+    "appInsights_StoreFront": {
+      "value": "ai-nb-public-prod"
+    },
+    "webAppName_StoreFront": {
+      "value": "as-nb-public-prod"
+    },
+    "virtoCommerceDistributorHomePage": {
+      "value": "~/distributor"
+    },
+    "virtoCommerceEndpointPassword": {
+      "value": "StorePass1"
+    },
+    "virtoCommerceEndpointURL": {
+      "value": "https://as-nb-backend-prod.azurewebsites.net"
+    },
+    "virtoCommerceEnvironment": {
+      "value": "PROD"
+    },
+    "virtoCommerceImpersonateApiKey": {
+      "value": "20210513-01"
+    },
+    "sqlserverName": {
+      "value": "ss-sqlsrv-prod"
+    },
+    "sqlAdministratorLogin": {
+      "value": "prod-admin"
+    },
+    "sqlAdministratorLoginPassword": {
+      "value": ""
+    },
+    "sqlElasticPoolName": {
+      "value": "sep-ng-sqlepool-prod"
+    },
+    "sqlDatabaseNameMain": {
+      "value": "sd-nb-main-db-prod"
+    },
+    "sqlDatabaseNameCart": {
+      "value": "sd-nb-cart-db-prod"
+    },
+    "sqlDatabaseNameCatalog": {
+      "value": "sd-nb-catalog-db-prod"
+    },
+    "sqlDatabaseNameCustomers": {
+      "value": "sd-nb-customers-db-prod"
+    },
+    "sqlDatabaseNameOrders": {
+      "value": "sd-nb-orders-db-prod"
+    },
+    "sqlDatabaseNamePricing": {
+      "value": "sd-nb-pricing-db-prod"
+    },
+    "storageAccountName": {
+      "value": "sanbstorageprod"
+    },
+    "searchServiceName": {
+      "value": "ss-search-prod"
+    },
+    "searchServiceScope": {
+      "value": "nb-prod"
+    },
+    "cacheName": {
+      "value": "acr-redis-prod"
+    },
+    "cacheRedisChannelName_Backend": {
+      "value": "nb-prod"
+    },
+    "cdnProfileName": {
+      "value": "cp-nb-cdn-prod"
+    },
+    "cdnEndpointName": {
+      "value": "ce-nb-images-prod"
+    },
+    "appServicePlanName_Backend": {
+      "value": "asp-nb-backend-prod"
+    },
+    "appInsights_Backend": {
+      "value": "ai-nb-backend-prod"
+    },
+    "webAppName_Backend": {
+      "value": "as-nb-backend-prod"
+    },
+    "storefrontEndpoint": {
+      "value": "https://as-nb-backend-prod.azurewebsites.net"
+    },
+    "azureADApplicationId": {
+      "value": "1"
+    },
+    "azureADTenantId": {
+      "value": "1"
+    },
+    "notificationEmailSender": {
+      "value": "1"
+    },
+    "notificationSendgridApiKey": {
+      "value": "1"
+    },
+    "CountryCode": {
+      "value": "US"
+    },
+    "notificationSmsGateway": {
+      "value": "1"
+    },
+    "notificationSmsGatewayATuserName": {
+      "value": "1"
+    },
+    "notificationSmsGatewayATapiKey": {
+      "value": "1"
+    },
+    "notificationSmsGatewayATsender": {
+      "value": "1"
+    }
+  }
+}
